@@ -43,7 +43,6 @@ const cloudinaryUploadQuote = async (file) => {
     type: "private",
   });
 
-  console.log(result);
   const fileURl = {
     url: result.secure_url,
     publicId: result.public_id,
