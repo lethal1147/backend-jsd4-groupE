@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import { cloudinaryUploadProfile } from "../utils/upload.js";
 import Activity from "../models/activity.model.js";
+import Quote from "../models/quote.model.js";
 
 // delete user account
 export const deleteUserAccount = async (req, res) => {
@@ -13,6 +14,8 @@ export const deleteUserAccount = async (req, res) => {
 
     const deleteActivity = await Activity.deleteMany({ userID: userid });
 
+    const deleteQuote = await Quote.deleteOne({ userID: userid });
+
     // // Check account for deleting
 
     if (!deleteAccount) {
@@ -21,7 +24,7 @@ export const deleteUserAccount = async (req, res) => {
     res.status(200).send({ message: "User account deleted" });
   } catch (err) {
     res
-      .status(500)
+      .status(400)
       .send({ message: err.message + "Failed to delete user account" });
   }
 };
@@ -39,7 +42,7 @@ export const getUser = async (req, res) => {
     return res.json({ data: account });
   } catch (err) {
     res
-      .status(500)
+      .status(400)
       .send({ message: err.message + "Failed to get user account" });
   }
 };
@@ -85,7 +88,7 @@ export const editProfile = async (req, res) => {
       account.picture = uploadedImage;
       account.weight = req.body.weight || account.weight;
       account.height = req.body.height || account.height;
-      account.rank = req.body.rank
+      account.rank = req.body.rank;
 
       await account.save();
 
@@ -102,7 +105,7 @@ export const editProfile = async (req, res) => {
       res.status(200).send({ message: "Profile updated successfully", data });
     } catch (err) {
       res
-        .status(500)
+        .status(400)
         .send({ message: err.message + "Failed to update user account" });
     }
   } else {
@@ -142,7 +145,7 @@ export const editProfile = async (req, res) => {
       account.picture = account.picture;
       account.weight = req.body.weight || account.weight;
       account.height = req.body.height || account.height;
-      account.rank = req.body.rank
+      account.rank = req.body.rank;
 
       await account.save();
 
@@ -159,7 +162,7 @@ export const editProfile = async (req, res) => {
       res.status(200).send({ message: "Profile updated successfully", data });
     } catch (err) {
       res
-        .status(500)
+        .status(400)
         .send({ message: err.message + "Failed to update user account" });
     }
   }
