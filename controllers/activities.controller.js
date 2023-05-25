@@ -23,15 +23,15 @@ export const postActivities = async (req, res) => {
         exp: req.body.exp,
         userID: req.body.userID,
       });
-      console.log(`this is ${newActivity}`);
+      // console.log(`this is ${newActivity}`);
 
       const user = await User.findById(newActivity.userID)
-      console.log(user)
+      // console.log(user)
       
       const nextRank = user.rank + newActivity.exp;
-      console.log(user)
+      // console.log(user)
       user.rank = nextRank;
-      console.log(user)
+      // console.log(user)
       await newActivity.save();
       await user.save()
 
@@ -69,15 +69,15 @@ export const getActivity = async (req, res) => {
 
 
 export const getSingleActivity = async (req, res) => {
-  console.log(req.params)
+  // console.log(req.params)
   try {
     const { id } = req.params;
-    console.log(`This is : ${id}`);
+    // console.log(`This is : ${id}`);
     
 
     const singleActivity = await Activity.findById(id);
 
-    console.log(`single activity: ${singleActivity}`)
+    // console.log(`single activity: ${singleActivity}`)
 
     if (!singleActivity) {
       return res.status(404).send("Activity not found")
@@ -96,7 +96,7 @@ export const updateActivity = async (req, res) => {
   if (req.file) {
     try {
       const uploadedImage = await cloudinaryUploadCard(req.file);
-      console.log(uploadedImage);
+      // console.log(uploadedImage);
 
       const updatedActivity = {
         title: req.body.title,
