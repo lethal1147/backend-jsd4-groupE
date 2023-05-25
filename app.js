@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary";
 import authRouter from "./routers/auth.router.js";
+import activitiesRouter from "./routers/activities.router.js";
+import quoteRouter from "./routers/quotes.router.js";
+import profileRouter from "./routers/profiles.router.js";
 
 async function init() {
   dotenv.config();
@@ -31,6 +34,9 @@ async function init() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use("/auth", authRouter);
+  app.use("/activities", activitiesRouter);
+  app.use("/quote", quoteRouter);
+  app.use("/profile", profileRouter);
 
   app.get("/", (req, res) => {
     res.send("Hello World!");
