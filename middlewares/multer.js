@@ -9,6 +9,14 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const fileFilter = function (req, file, callback) {
+  // Only allow image files with these extensions
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return callback(new Error("Only image files are allowed!"), false);
+  }
+  callback(null, true);
+};
+
+const upload = multer({ storage, fileFilter });
 
 export { upload };

@@ -26,7 +26,7 @@ export const quoteUpdate = async (req, res) => {
       return res.json("quote updated successfully");
     } catch (err) {
       console.log(err);
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
   } else {
     try {
@@ -47,7 +47,7 @@ export const quoteUpdate = async (req, res) => {
       return res.json("quote updated successfully");
     } catch (err) {
       console.log(err);
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
   }
 };
@@ -63,6 +63,6 @@ export const getQuote = async (req, res) => {
 
     return res.json({ data: quote });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
